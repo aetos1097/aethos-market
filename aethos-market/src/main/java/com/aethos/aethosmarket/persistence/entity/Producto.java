@@ -10,7 +10,8 @@ public class Producto {
     @Column(name = "id_producto")
     private Integer idproducto;
 
-    private String name;
+    private String nombre;
+
     @Column(name = "id_categoria")
     private Integer idCategoria;
 
@@ -38,12 +39,12 @@ public class Producto {
         this.idproducto = idproducto;
     }
 
-    public String getName() {
-        return name;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public Integer getIdCategoria() {
@@ -84,5 +85,13 @@ public class Producto {
 
     public void setEstado(Boolean estado) {
         this.estado = estado;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 }

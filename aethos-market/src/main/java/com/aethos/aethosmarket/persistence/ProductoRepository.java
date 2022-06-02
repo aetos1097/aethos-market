@@ -5,6 +5,7 @@ import com.aethos.aethosmarket.domain.repository.ProductRepository;
 import com.aethos.aethosmarket.persistence.crud.ProductoCrudRepository;
 import com.aethos.aethosmarket.persistence.entity.Producto;
 import com.aethos.aethosmarket.persistence.mapper.ProductMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -12,7 +13,10 @@ import java.util.Optional;
 
 @Repository
 public class ProductoRepository implements ProductRepository {
+    @Autowired
     private ProductoCrudRepository productoCrudRepository;
+
+    @Autowired
     private ProductMapper mapper;
 
 
@@ -20,7 +24,7 @@ public class ProductoRepository implements ProductRepository {
     //En esta parte nuestro porducto repository queda enfocado al dominio y no a una tabla.
 
     @Override
-    public List<Product> getALL() {
+    public List<Product> getAll() {
         List<Producto> productos = (List<Producto>) productoCrudRepository.findAll();
         return mapper.toProducts(productos);
     }
