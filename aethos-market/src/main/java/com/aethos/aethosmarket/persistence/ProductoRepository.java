@@ -21,7 +21,7 @@ public class ProductoRepository implements ProductRepository {
 
 
 
-    //En esta parte nuestro porducto repository queda enfocado al dominio y no a una tabla.
+    //En esta parte nuestro producto repository queda enfocado al dominio y no a una tabla.
 
     @Override
     public List<Product> getAll() {
