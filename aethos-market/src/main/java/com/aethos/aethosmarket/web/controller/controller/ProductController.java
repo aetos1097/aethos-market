@@ -1,7 +1,11 @@
-package com.aethos.aethosmarket.web.controller;
+package com.aethos.aethosmarket.web.controller.controller;
 
 import com.aethos.aethosmarket.domain.Product;
 import com.aethos.aethosmarket.domain.service.ProductService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,12 +22,19 @@ public class ProductController {
     private ProductService productService;
 
     @GetMapping("/all")
+    @ApiOperation("Get all bartering products ")
+    @ApiResponse(code = 200, message ="OK")
     public ResponseEntity<List<Product>> getAll(){ //en esta linea retornamos el cuerpo de la peticion
         return new ResponseEntity<>(productService.getAll(), HttpStatus.OK);//se crea una nueva instancia de response enla cual se nevia dos parametros, la respuesta y el status
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Product> getProduct(@PathVariable("id") int productId){
+    @ApiOperation("Search all product with an Id")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Ok"),
+            @ApiResponse(code=404, message = "Product not found")
+    })
+    public ResponseEntity<Product> getProduct(@ApiParam(value = "The id of product",required = true, example="7")@PathVariable("id") int productId){
         return productService.getProduct(productId)
                 .map(product -> new ResponseEntity<>(product, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
